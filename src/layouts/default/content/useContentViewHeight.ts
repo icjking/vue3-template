@@ -1,6 +1,6 @@
 import { ref, computed, unref } from 'vue';
-import { createPageContext } from '/@/hooks/component/usePageContext';
-import { useWindowSizeFn } from '/@/hooks/event/useWindowSizeFn';
+import { createPageContext } from '@/hooks/component/usePageContext';
+import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
 
 const headerHeightRef = ref(0);
 const footerHeightRef = ref(0);
@@ -9,9 +9,11 @@ export function useLayoutHeight() {
   function setHeaderHeight(val) {
     headerHeightRef.value = val;
   }
+
   function setFooterHeight(val) {
     footerHeightRef.value = val;
   }
+
   return { headerHeightRef, footerHeightRef, setHeaderHeight, setFooterHeight };
 }
 

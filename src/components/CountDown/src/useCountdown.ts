@@ -4,7 +4,7 @@ import { tryOnUnmounted } from '@vueuse/core';
 export function useCountdown(count: number) {
   const currentCount = ref(count);
 
-  const isStart = ref(false);
+  const isStart = ref<boolean>(false);
 
   let timerId: ReturnType<typeof setInterval> | null;
 

@@ -3,11 +3,11 @@ import type { PaginationProps } from '../types/pagination';
 import type { ComputedRef } from 'vue';
 import { computed, Ref, ref, reactive, toRaw, unref, watch } from 'vue';
 import { renderEditCell } from '../components/editable';
-import { usePermission } from '/@/hooks/web/usePermission';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { isArray, isBoolean, isFunction, isMap, isString } from '/@/utils/is';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useI18n } from '@/hooks/web/useI18n';
+import { isArray, isBoolean, isFunction, isMap, isString } from '@/utils/is';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { formatToDate } from '/@/utils/dateUtil';
+import { formatToDate } from '@/utils/dateUtil';
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from '../const';
 
 function handleItem(item: BasicColumn, ellipsis: boolean) {
@@ -15,7 +15,7 @@ function handleItem(item: BasicColumn, ellipsis: boolean) {
   item.align = item.align || DEFAULT_ALIGN;
   if (ellipsis) {
     if (!key) {
-      item.key = dataIndex;
+      item.key = dataIndex as number | string;
     }
     if (!isBoolean(item.ellipsis)) {
       Object.assign(item, {
@@ -24,7 +24,7 @@ function handleItem(item: BasicColumn, ellipsis: boolean) {
     }
   }
   if (children && children.length) {
-    handleChildren(children, !!ellipsis);
+    handleChildren(children, ellipsis);
   }
 }
 
@@ -76,11 +76,7 @@ function handleIndexColumn(
       const { current = 1, pageSize = PAGE_SIZE } = getPagination;
       return ((current < 1 ? 1 : current) - 1) * pageSize + index + 1;
     },
-    ...(isFixedLeft
-      ? {
-          fixed: 'left',
-        }
-      : {}),
+    ...(isFixedLeft ? { fixed: 'left' } : {}),
     ...indexColumnProps,
   });
 }
@@ -141,6 +137,7 @@ export function useColumns(
     }
     return isIfShow;
   }
+
   const { hasPermission } = usePermission();
 
   const getViewColumns = computed(() => {
@@ -156,7 +153,7 @@ export function useColumns(
 
         if (!slots || !slots?.title) {
           // column.slots = { title: `header-${dataIndex}`, ...(slots || {}) };
-          column.customTitle = column.title;
+          column.customTitle = column.title as VueNode;
           Reflect.deleteProperty(column, 'title');
         }
         const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!);
@@ -193,6 +190,7 @@ export function useColumns(
       }
     });
   }
+
   /**
    * set columns
    * @param columnList key｜column
@@ -250,6 +248,7 @@ export function useColumns(
 
     return columns;
   }
+
   function getCacheColumns() {
     return cacheColumns;
   }

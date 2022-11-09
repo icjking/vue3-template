@@ -3,6 +3,7 @@ import { ref, watch, unref } from 'vue';
 import { useThrottleFn, useDebounceFn } from '@vueuse/core';
 
 export type RemoveEventFn = () => void;
+
 export interface UseEventParams {
   el?: Element | Ref<Element | undefined> | Window | any;
   name: string;
@@ -12,6 +13,7 @@ export interface UseEventParams {
   isDebounce?: boolean;
   wait?: number;
 }
+
 export function useEventListener({
   el = window,
   name,

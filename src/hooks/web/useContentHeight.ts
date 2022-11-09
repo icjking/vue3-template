@@ -1,9 +1,9 @@
 import { ComputedRef, isRef, nextTick, Ref, ref, unref, watch } from 'vue';
-import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated';
-import { useWindowSizeFn } from '/@/hooks/event/useWindowSizeFn';
-import { useLayoutHeight } from '/@/layouts/default/content/useContentViewHeight';
-import { getViewportOffset } from '/@/utils/domUtils';
-import { isNumber, isString } from '/@/utils/is';
+import { onMountedOrActivated } from '@/hooks/core/onMountedOrActivated';
+import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
+import { useLayoutHeight } from '@/layouts/default/content/useContentViewHeight';
+import { getViewportOffset } from '@/utils/domUtils';
+import { isNumber, isString } from '@/utils/is';
 
 export interface CompensationHeight {
   // 使用 layout Footer 高度作为判断补偿高度的条件
@@ -57,6 +57,7 @@ export function useContentHeight(
     function numberPx(px: string) {
       return Number(px.replace(/[^\d]/g, ''));
     }
+
     let subtractHeight = 0;
     const ZERO_PX = '0px';
     if (element) {
@@ -115,6 +116,7 @@ export function useContentHeight(
 
     // upwardSpace
     let upwardSpaceHeight = 0;
+
     function upward(element: Element | null, upwardLvlOrClass: number | string | null | undefined) {
       if (element && upwardLvlOrClass) {
         const parent = element.parentElement;
@@ -135,6 +137,7 @@ export function useContentHeight(
         }
       }
     }
+
     if (isRef(upwardSpace)) {
       upward(anchorEl, unref(upwardSpace));
     } else {

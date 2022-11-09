@@ -11,9 +11,9 @@ import {
   Ref,
   watchEffect,
 } from 'vue';
-import { useTimeoutFn } from '/@/hooks/core/useTimeout';
-import { buildUUID } from '/@/utils/uuid';
-import { isFunction, isBoolean } from '/@/utils/is';
+import { useTimeoutFn } from '@/hooks/core/useTimeout';
+import { buildUUID } from '@/utils/uuid';
+import { isFunction, isBoolean } from '@/utils/is';
 import { get, cloneDeep, merge } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 
@@ -30,6 +30,7 @@ interface SearchState {
   sortInfo: Recordable;
   filterInfo: Record<string, string[]>;
 }
+
 export function useDataSource(
   propsRef: ComputedRef<BasicTableProps>,
   {
@@ -334,7 +335,7 @@ export function useDataSource(
   }
 
   function setTableData<T = Recordable>(values: T[]) {
-    dataSourceRef.value = values;
+    dataSourceRef.value = values as any[];
   }
 
   function getDataSource<T = Recordable>() {

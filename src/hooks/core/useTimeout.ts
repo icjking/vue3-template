@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue';
 import { tryOnUnmounted } from '@vueuse/core';
-import { isFunction } from '/@/utils/is';
+import { isFunction } from '@/utils/is';
 
 export function useTimeoutFn(handle: Fn<any>, wait: number, native = false) {
   if (!isFunction(handle)) {
@@ -26,10 +26,12 @@ export function useTimeoutRef(wait: number) {
   const readyRef = ref(false);
 
   let timer: TimeoutHandle;
+
   function stop(): void {
     readyRef.value = false;
     timer && window.clearTimeout(timer);
   }
+
   function start(): void {
     stop();
     timer = setTimeout(() => {

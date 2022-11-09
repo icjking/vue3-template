@@ -1,7 +1,7 @@
-@header-trigger-prefix-cls: ~'@{namespace}-layout-header-trigger';
-@header-prefix-cls: ~'@{namespace}-layout-header';
-@breadcrumb-prefix-cls: ~'@{namespace}-layout-breadcrumb';
-@logo-prefix-cls: ~'@{namespace}-app-logo';
+@header-trigger-prefix-cls: ~'@{name-space}-layout-header-trigger';
+@header-prefix-cls: ~'@{name-space}-layout-header';
+@breadcrumb-prefix-cls: ~'@{name-space}-layout-breadcrumb';
+@logo-prefix-cls: ~'@{name-space}-app-logo';
 
 .@{header-prefix-cls} {
   display: flex;
@@ -30,9 +30,11 @@
         display: none;
       }
     }
+
     .@{header-trigger-prefix-cls} {
       padding: 0 4px 0 8px !important;
     }
+
     .@{header-prefix-cls}-action {
       padding-right: 4px;
     }
@@ -168,6 +170,7 @@
     background-color: @header-dark-bg-color !important;
     // border-bottom: 1px solid @border-color-base;
     border-left: 1px solid @border-color-base;
+
     .@{header-prefix-cls}-logo {
       &:hover {
         background-color: @header-dark-bg-hover-color;

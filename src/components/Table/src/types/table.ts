@@ -1,12 +1,12 @@
 import type { VNodeChild } from 'vue';
 import type { PaginationProps } from './pagination';
-import type { FormProps } from '/@/components/Form';
+import type { FormProps } from '@/components/Form';
 import type { TableRowSelection as ITableRowSelection } from 'ant-design-vue/lib/table/interface';
 import type { ColumnProps } from 'ant-design-vue/lib/table';
 
 import { ComponentType } from './componentType';
-import { VueNode } from '/@/utils/propTypes';
-import { RoleEnum } from '/@/enums/roleEnum';
+import { VueNode } from '@/utils/propTypes';
+import { RoleEnum } from '@/enums/roleEnum';
 
 export declare type SortOrder = 'ascend' | 'descend';
 
@@ -49,6 +49,7 @@ export interface ExpandedRowRenderRecord<T> extends TableCustomRecord<T> {
   indent?: number;
   expanded?: boolean;
 }
+
 export interface ColumnFilterItem {
   text?: string;
   value?: string;
@@ -441,6 +442,7 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   editRow?: boolean;
   editable?: boolean;
   editComponent?: ComponentType;
+  // @formatter:off
   editComponentProps?:
     | ((opt: {
         text: string | number | boolean | Recordable;
@@ -449,6 +451,7 @@ export interface BasicColumn extends ColumnProps<Recordable> {
         index: number;
       }) => Recordable)
     | Recordable;
+  // @formatter:on
   editRule?: boolean | ((text: string, record: Recordable) => Promise<string>);
   editValueMap?: (value: any) => string;
   onEditRow?: () => void;

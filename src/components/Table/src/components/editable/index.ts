@@ -1,9 +1,9 @@
-import type { BasicColumn } from '/@/components/Table/src/types/table';
+import type { BasicColumn } from '@/components/Table/src/types/table';
 
 import { h, Ref } from 'vue';
 
 import EditableCell from './EditableCell.vue';
-import { isArray } from '/@/utils/is';
+import { isArray } from '@/utils/is';
 
 interface Params {
   text: string;
@@ -53,6 +53,7 @@ export function renderEditCell(column: BasicColumn) {
   };
 }
 
+// @formatter:off
 export type EditRecordRow<T = Recordable> = Partial<
   {
     onEdit: (editable: boolean, submit?: boolean) => Promise<boolean>;
@@ -66,3 +67,4 @@ export type EditRecordRow<T = Recordable> = Partial<
     editValueRefs: Recordable<Ref>;
   } & T
 >;
+// @formatter:on

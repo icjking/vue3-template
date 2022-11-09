@@ -18,23 +18,24 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 
-  import { basicProps } from '../props';
-  export default defineComponent({
-    name: 'BasicModalFooter',
-    props: basicProps,
-    emits: ['ok', 'cancel'],
-    setup(_, { emit }) {
-      function handleOk(e: Event) {
-        emit('ok', e);
-      }
+import { basicProps } from '../props';
 
-      function handleCancel(e: Event) {
-        emit('cancel', e);
-      }
+export default defineComponent({
+  name: 'BasicModalFooter',
+  props: basicProps,
+  emits: ['ok', 'cancel'],
+  setup(_, { emit }) {
+    function handleOk(e: Event) {
+      emit('ok', e);
+    }
 
-      return { handleOk, handleCancel };
-    },
-  });
+    function handleCancel(e: Event) {
+      emit('cancel', e);
+    }
+
+    return { handleOk, handleCancel, ...basicProps };
+  },
+});
 </script>

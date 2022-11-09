@@ -48,7 +48,9 @@ export default {
   exception: {
     backLogin: 'Back Login',
     backHome: 'Back Home',
+    // @formatter:off
     subTitle403: "Sorry, you don't have access to this page.",
+    // @formatter:on
     subTitle404: 'Sorry, the page you visited does not exist.',
     subTitle500: 'Sorry, the server is reporting an error.',
     noDataTitle: 'No data on the current page.',

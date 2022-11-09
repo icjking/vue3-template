@@ -1,8 +1,9 @@
 import type { ValidationRule } from 'ant-design-vue/lib/form/Form';
+import dayjs from 'dayjs';
 import type { ComponentType } from './types/index';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { dateUtil } from '/@/utils/dateUtil';
-import { isNumber, isObject } from '/@/utils/is';
+import { useI18n } from '@/hooks/web/useI18n';
+import { dateUtil } from '@/utils/dateUtil';
+import { isNumber, isObject } from '@/utils/is';
 
 const { t } = useI18n();
 
@@ -52,7 +53,7 @@ export function setComponentRuleType(
 export function processDateValue(attr: Recordable, component: string) {
   const { valueFormat, value } = attr;
   if (valueFormat) {
-    attr.value = isObject(value) ? dateUtil(value).format(valueFormat) : value;
+    attr.value = isObject(value) ? dateUtil(value as dayjs.Dayjs).format(valueFormat) : value;
   } else if (DATE_TYPE.includes(component) && value) {
     attr.value = dateUtil(attr.value);
   }

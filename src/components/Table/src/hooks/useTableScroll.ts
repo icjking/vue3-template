@@ -1,11 +1,11 @@
 import type { BasicTableProps, TableRowSelection, BasicColumn } from '../types/table';
 import { Ref, ComputedRef, ref } from 'vue';
 import { computed, unref, nextTick, watch } from 'vue';
-import { getViewportOffset } from '/@/utils/domUtils';
-import { isBoolean } from '/@/utils/is';
-import { useWindowSizeFn } from '/@/hooks/event/useWindowSizeFn';
-import { useModalContext } from '/@/components/Modal';
-import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated';
+import { getViewportOffset } from '@/utils/domUtils';
+import { isBoolean } from '@/utils/is';
+import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
+import { useModalContext } from '@/components/Modal';
+import { onMountedOrActivated } from '@/hooks/core/onMountedOrActivated';
 import { useDebounceFn } from '@vueuse/core';
 
 export function useTableScroll(
@@ -172,6 +172,7 @@ export function useTableScroll(
 
     bodyEl!.style.height = `${height}px`;
   }
+
   useWindowSizeFn(calcTableHeight, 280);
   onMountedOrActivated(() => {
     calcTableHeight();

@@ -1,5 +1,6 @@
 // copy from element-plus
 
+// @formatter:off
 import { warn } from 'vue';
 import { isObject } from '@vue/shared';
 import { fromPairs } from 'lodash-es';
@@ -74,21 +75,21 @@ export type BuildPropReturn<T, D, R, V, C> = {
  * @description Build prop. It can better optimize prop types
  * @description 生成 prop，能更好地优化类型
  * @example
-  // limited options
-  // the type will be PropType<'light' | 'dark'>
-  buildProp({
+ // limited options
+ // the type will be PropType<'light' | 'dark'>
+ buildProp({
     type: String,
     values: ['light', 'dark'],
   } as const)
-  * @example
-  // limited options and other types
-  // the type will be PropType<'small' | 'medium' | number>
-  buildProp({
+ * @example
+ // limited options and other types
+ // the type will be PropType<'small' | 'medium' | number>
+ buildProp({
     type: [String, Number],
     values: ['small', 'medium'],
     validator: (val: unknown): val is number => typeof val === 'number',
   } as const)
-  @link see more: https://github.com/element-plus/element-plus/pull/3341
+ @link see more: https://github.com/element-plus/element-plus/pull/3341
  */
 export function buildProp<
   T = never,
@@ -131,7 +132,7 @@ export function buildProp<
   return {
     type:
       typeof type === 'object' && Object.getOwnPropertySymbols(type).includes(wrapperKey)
-        ? type[wrapperKey]
+        ? type![wrapperKey]
         : type,
     required: !!required,
     default: defaultValue,
@@ -178,7 +179,7 @@ export const buildProps = <
 
 export const definePropType = <T>(val: any) => ({ [wrapperKey]: val } as PropWrapper<T>);
 
-export const keyOf = <T>(arr: T) => Object.keys(arr) as Array<keyof T>;
+export const keyOf = <T>(arr: T | object) => Object.keys(arr as object) as Array<keyof T>;
 export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) =>
   val as Mutable<typeof val>;
 

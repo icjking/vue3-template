@@ -3,7 +3,7 @@ import {
   // FunctionalComponent, CSSProperties
 } from 'vue';
 import { Spin } from 'ant-design-vue';
-import { noop } from '/@/utils';
+import { noop } from '@/utils';
 
 // const Loading: FunctionalComponent<{ size: 'small' | 'default' | 'large' }> = (props) => {
 //   const style: CSSProperties = {
@@ -47,6 +47,7 @@ export function createAsyncComponent(loader: Fn, options: Options = {}) {
      * @param {*} fail  End of failure
      * @param {*} attempts Maximum allowed retries number
      */
+    // @formatter:off
     onError: !retry
       ? noop
       : (error, retry, fail, attempts) => {

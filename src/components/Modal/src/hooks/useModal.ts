@@ -15,11 +15,11 @@ import {
   nextTick,
   toRaw,
 } from 'vue';
-import { isProdMode } from '/@/utils/env';
-import { isFunction } from '/@/utils/is';
+import { isProdMode } from '@/utils/env';
+import { isFunction } from '@/utils/is';
 import { isEqual } from 'lodash-es';
 import { tryOnUnmounted } from '@vueuse/core';
-import { error } from '/@/utils/log';
+import { error } from '@/utils/log';
 import { computed } from 'vue';
 
 const dataTransfer = reactive<any>({});
@@ -39,12 +39,13 @@ export function useModal(): UseModalReturnType {
       throw new Error('useModal() can only be used inside setup() or functional components!');
     }
     uid.value = uuid;
-    isProdMode() &&
+    if (isProdMode()) {
       onUnmounted(() => {
         modal.value = null;
         loaded.value = false;
         dataTransfer[unref(uid)] = null;
       });
+    }
     if (unref(loaded) && isProdMode() && modalMethod === unref(modal)) return;
 
     modal.value = modalMethod;
@@ -114,10 +115,11 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
   };
 
   const register = (modalInstance: ModalMethods, uuid: string) => {
-    isProdMode() &&
+    if (isProdMode()) {
       tryOnUnmounted(() => {
         modalInstanceRef.value = null;
       });
+    }
     uidRef.value = uuid;
     modalInstanceRef.value = modalInstance;
     currentInstance?.emit('register', modalInstance, uuid);

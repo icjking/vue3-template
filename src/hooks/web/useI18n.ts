@@ -1,4 +1,4 @@
-import { i18n } from '/@/locales/setupI18n';
+import { i18n } from '@/locales/setupI18n';
 
 type I18nGlobalTranslation = {
   (key: string): string;
@@ -39,6 +39,7 @@ export function useI18n(namespace?: string): {
   const tFn: I18nGlobalTranslation = (key: string, ...arg: any[]) => {
     if (!key) return '';
     if (!key.includes('.') && !namespace) return key;
+    // @ts-ignore
     return t(getKey(namespace, key), ...(arg as I18nTranslationRestParameters));
   };
   return {

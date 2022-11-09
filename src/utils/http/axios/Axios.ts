@@ -1,13 +1,13 @@
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import type { RequestOptions, Result, UploadFileParams } from '/#/axios';
+import type { RequestOptions, Result, UploadFileParams } from '#/axios';
 import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
 import qs from 'qs';
 import { AxiosCanceler } from './axiosCancel';
-import { isFunction } from '/@/utils/is';
+import { isFunction } from '@/utils/is';
 import { cloneDeep } from 'lodash-es';
-import { ContentTypeEnum } from '/@/enums/httpEnum';
-import { RequestEnum } from '/@/enums/httpEnum';
+import { ContentTypeEnum } from '@/enums/httpEnum';
+import { RequestEnum } from '@/enums/httpEnum';
 
 export * from './axiosTransform';
 
@@ -95,9 +95,9 @@ export class VAxios {
     }, undefined);
 
     // Request interceptor error capture
-    requestInterceptorsCatch &&
-      isFunction(requestInterceptorsCatch) &&
+    if (requestInterceptorsCatch && isFunction(requestInterceptorsCatch)) {
       this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
+    }
 
     // Response result interceptor processing
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
@@ -109,12 +109,12 @@ export class VAxios {
     }, undefined);
 
     // Response result interceptor error capture
-    responseInterceptorsCatch &&
-      isFunction(responseInterceptorsCatch) &&
+    if (responseInterceptorsCatch && isFunction(responseInterceptorsCatch)) {
       this.axiosInstance.interceptors.response.use(undefined, (error) => {
         // @ts-ignore
         return responseInterceptorsCatch(this.axiosInstance, error);
       });
+    }
   }
 
   /**

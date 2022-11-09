@@ -2,12 +2,12 @@ import type { ComputedRef, Ref } from 'vue';
 import type { FormProps, FormSchema, FormActionType } from '../types/form';
 import type { NamePath } from 'ant-design-vue/lib/form/interface';
 import { unref, toRaw, nextTick } from 'vue';
-import { isArray, isFunction, isObject, isString, isDef, isNullOrUnDef } from '/@/utils/is';
-import { deepMerge } from '/@/utils';
+import { isArray, isFunction, isObject, isString, isDef, isNullOrUnDef } from '@/utils/is';
+import { deepMerge } from '@/utils';
 import { dateItemType, handleInputNumberValue, defaultValueComponents } from '../helper';
-import { dateUtil } from '/@/utils/dateUtil';
+import { dateUtil } from '@/utils/dateUtil';
 import { cloneDeep, uniqBy } from 'lodash-es';
-import { error } from '/@/utils/log';
+import { error } from '@/utils/log';
 
 interface UseFormActionContext {
   emit: EmitType;
@@ -19,6 +19,7 @@ interface UseFormActionContext {
   schemaRef: Ref<FormSchema[]>;
   handleFormValues: Fn;
 }
+
 export function useFormEvents({
   emit,
   getProps,
@@ -51,7 +52,7 @@ export function useFormEvents({
   /**
    * @description: Set form value
    */
-  async function setFieldsValue(values: Recordable): Promise<void> {
+  async function setFieldsValue(values: Recordable | any): Promise<void> {
     const fields = unref(getSchema)
       .map((item) => item.field)
       .filter(Boolean);
@@ -109,6 +110,7 @@ export function useFormEvents({
     });
     validateFields(validKeys).catch((_) => {});
   }
+
   /**
    * @description: Delete based on field name
    */

@@ -1,9 +1,10 @@
-import { on } from '/@/utils/domUtils';
-import { isServer } from '/@/utils/is';
+import { on } from '@/utils/domUtils';
+import { isServer } from '@/utils/is';
 import type { ComponentPublicInstance, DirectiveBinding, ObjectDirective } from 'vue';
 
 type DocumentHandler = <T extends MouseEvent>(mouseup: T, mousedown: T) => void;
 
+// @formatter:off
 type FlushList = Map<
   HTMLElement,
   {
@@ -11,6 +12,7 @@ type FlushList = Map<
     bindingFn: (...args: unknown[]) => unknown;
   }
 >;
+// @formatter:on
 
 const nodeList: FlushList = new Map();
 

@@ -1,7 +1,7 @@
 import { Tag } from 'ant-design-vue';
-import { BasicColumn } from '/@/components/Table/index';
-import { ErrorTypeEnum } from '/@/enums/exceptionEnum';
-import { useI18n } from '/@/hooks/web/useI18n';
+import { BasicColumn } from '@/components/Table/index';
+import { ErrorTypeEnum } from '@/enums/exceptionEnum';
+import { useI18n } from '@/hooks/web/useI18n';
 
 const { t } = useI18n();
 
@@ -12,6 +12,7 @@ export function getColumns(): BasicColumn[] {
       title: t('sys.errorLog.tableColumnType'),
       width: 80,
       customRender: ({ text }) => {
+        // @formatter:off
         const color =
           text === ErrorTypeEnum.VUE
             ? 'green'
@@ -22,6 +23,7 @@ export function getColumns(): BasicColumn[] {
             : ErrorTypeEnum.AJAX
             ? 'red'
             : 'purple';
+        // @formatter:on
         return <Tag color={color}>{() => text}</Tag>;
       },
     },

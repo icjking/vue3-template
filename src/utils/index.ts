@@ -1,8 +1,9 @@
+import { Component } from '@vue/runtime-core';
 import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
 import type { App, Plugin } from 'vue';
 
 import { unref } from 'vue';
-import { isObject } from '/@/utils/is';
+import { isObject } from '@/utils/is';
 
 export const noop = () => {};
 
@@ -58,7 +59,7 @@ export function openWindow(
 export function getDynamicProps<T, U>(props: T): Partial<U> {
   const ret: Recordable = {};
 
-  Object.keys(props).map((key) => {
+  Object.keys(props as object).map((key) => {
     ret[key] = unref((props as Recordable)[key]);
   });
 
@@ -68,6 +69,7 @@ export function getDynamicProps<T, U>(props: T): Partial<U> {
 export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
   if (!route) return route;
   const { matched, ...opt } = route;
+  // @formatter:off
   return {
     ...opt,
     matched: (matched
@@ -78,12 +80,13 @@ export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormal
         }))
       : undefined) as RouteRecordNormalized[],
   };
+  // @formatter:on
 }
 
 export const withInstall = <T>(component: T, alias?: string) => {
   const comp = component as any;
   comp.install = (app: App) => {
-    app.component(comp.name || comp.displayName, component);
+    app.component(comp.name || comp.displayName, component as Component);
     if (alias) {
       app.config.globalProperties[alias] = component;
     }

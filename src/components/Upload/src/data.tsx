@@ -1,13 +1,13 @@
-import type { BasicColumn, ActionItem } from '/@/components/Table';
+import type { BasicColumn, ActionItem } from '@/components/Table';
 import { FileItem, PreviewFileItem, UploadResultStatus } from './typing';
 import {
   // checkImgType,
   isImgTypeByName,
 } from './helper';
 import { Progress, Tag } from 'ant-design-vue';
-import TableAction from '/@/components/Table/src/components/TableAction.vue';
+import TableAction from '@/components/Table/src/components/TableAction.vue';
 import ThumbUrl from './ThumbUrl.vue';
-import { useI18n } from '/@/hooks/web/useI18n';
+import { useI18n } from '@/hooks/web/useI18n';
 
 const { t } = useI18n();
 
@@ -78,6 +78,7 @@ export function createTableColumns(): BasicColumn[] {
     },
   ];
 }
+
 export function createActionColumn(handleRemove: Function): BasicColumn {
   return {
     width: 120,
@@ -102,6 +103,7 @@ export function createActionColumn(handleRemove: Function): BasicColumn {
     },
   };
 }
+
 // 文件预览列表
 export function createPreviewColumns(): BasicColumn[] {
   return [

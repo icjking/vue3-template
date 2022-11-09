@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue';
 import type { BasicTableProps } from '../types/table';
 import { unref } from 'vue';
 import { ROW_KEY } from '../const';
-import { isString, isFunction } from '/@/utils/is';
+import { isString, isFunction } from '@/utils/is';
 
 interface Options {
   setSelectedRowKeys: (keys: string[]) => void;
@@ -37,6 +37,7 @@ export function useCustomRow(
     return {
       onClick: (e: Event) => {
         e?.stopPropagation();
+
         function handleClick() {
           const { rowSelection, rowKey, clickToRowSelect } = unref(propsRef);
           if (!rowSelection || !clickToRowSelect) return;
@@ -76,6 +77,7 @@ export function useCustomRow(
             clearSelectedRowKeys();
           }
         }
+
         handleClick();
         emit('row-click', record, index, e);
       },
